@@ -245,14 +245,22 @@ export class StorageService {
 
     return files;
   }
+  private resolveSafePath(filePath: string): string {
+    const fullPath = path.resolve(this.localPath, filePath);
+    const resolvedBase = path.resolve(this.localPath);
+    if (!fullPath.startsWith(resolvedBase)) {
+      throw new Error(`Invalid path: Directory traversal detected (${filePath})`);
+    }
+    return fullPath;
+  }
 
   private getLocalFile(filePath: string): Promise<Buffer> {
-    const fullPath = path.join(this.localPath, filePath);
+    const fullPath = this.resolveSafePath(filePath);
     return Promise.resolve(fs.readFileSync(fullPath));
   }
 
   private putLocalFile(filePath: string, data: Buffer): Promise<void> {
-    const fullPath = path.join(this.localPath, filePath);
+    const fullPath = this.resolveSafePath(filePath);
     const dir = path.dirname(fullPath);
 
     if (!fs.existsSync(dir)) {

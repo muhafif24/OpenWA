@@ -124,10 +124,19 @@ export class PluginStorageService {
 
     const logger = this.logger;
 
+    const getSafePath = (key: string): string => {
+      const filePath = path.resolve(pluginDataDir, `${key}.json`);
+      const resolvedDir = path.resolve(pluginDataDir);
+      if (!filePath.startsWith(resolvedDir)) {
+        throw new Error(`Directory traversal attempt detected with key: ${key}`);
+      }
+      return filePath;
+    };
+
     return {
       get: <T = unknown>(key: string): Promise<T | null> => {
-        const filePath = path.join(pluginDataDir, `${key}.json`);
         try {
+          const filePath = getSafePath(key);
           if (fs.existsSync(filePath)) {
             const content = fs.readFileSync(filePath, 'utf-8');
             return Promise.resolve(JSON.parse(content) as T);
@@ -139,8 +148,8 @@ export class PluginStorageService {
       },
 
       set: <T = unknown>(key: string, value: T): Promise<void> => {
-        const filePath = path.join(pluginDataDir, `${key}.json`);
         try {
+          const filePath = getSafePath(key);
           fs.writeFileSync(filePath, JSON.stringify(value, null, 2));
           return Promise.resolve();
         } catch (error) {
@@ -150,8 +159,8 @@ export class PluginStorageService {
       },
 
       delete: (key: string): Promise<void> => {
-        const filePath = path.join(pluginDataDir, `${key}.json`);
         try {
+          const filePath = getSafePath(key);
           if (fs.existsSync(filePath)) {
             fs.unlinkSync(filePath);
           }

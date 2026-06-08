@@ -26,16 +26,15 @@ export class AuthService implements OnModuleInit {
     let isNewKey = false;
 
     if (count === 0) {
-      // Use predictable key in development, random key in production
-      displayKey =
-        process.env.NODE_ENV === 'production' ? `owa_k1_${randomBytes(32).toString('hex')}` : 'dev-admin-key';
+      // Always generate a random key for security
+      displayKey = `owa_k1_${randomBytes(32).toString('hex')}`;
 
       await this.seedApiKey(displayKey, 'Default Admin Key', ApiKeyRole.ADMIN);
       isNewKey = true;
 
-      // Save raw key to file for startup script to read
+      // Save raw key to file for startup script to read, with secure permissions
       try {
-        writeFileSync(API_KEY_FILE, displayKey, 'utf-8');
+        writeFileSync(API_KEY_FILE, displayKey, { encoding: 'utf-8', mode: 0o600 });
       } catch (err) {
         this.logger.warn('Could not save API key file', { error: String(err) });
       }

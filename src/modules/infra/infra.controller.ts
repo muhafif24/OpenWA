@@ -3,8 +3,11 @@ import { ApiTags, ApiOperation, ApiResponse, ApiBody } from '@nestjs/swagger';
 import { ConfigService } from '@nestjs/config';
 import { DataSource } from 'typeorm';
 import { InjectDataSource } from '@nestjs/typeorm';
-import { Public } from '../auth/decorators/auth.decorators';
+import { Public, RequireRole } from '../auth/decorators/auth.decorators';
+import { ApiKeyRole } from '../auth/entities/api-key.entity';
 import { EngineFactory } from '../../engine/engine.factory';
+import { IsOptional, IsString, IsBoolean, ValidateNested, IsNumber, IsIn } from 'class-validator';
+import { Type } from 'class-transformer';
 import { DockerService } from '../docker';
 import { CacheService } from '../../common/cache/cache.service';
 import { StorageService } from '../../common/storage/storage.service';
@@ -25,43 +28,72 @@ interface InfraStatus {
   engine: { type: string; headless: boolean; sessionDataPath: string; browserArgs: string };
 }
 
-interface SaveConfigDto {
-  database?: {
-    type: 'sqlite' | 'postgres';
-    builtIn?: boolean;
-    host?: string;
-    port?: string;
-    username?: string;
-    password?: string;
-    database?: string;
-    poolSize?: number;
-    sslEnabled?: boolean;
-  };
-  redis?: {
-    enabled?: boolean;
-    builtIn?: boolean;
-    host?: string;
-    port?: string;
-    password?: string;
-  };
-  queue?: {
-    enabled?: boolean;
-  };
-  storage?: {
-    type: 'local' | 's3';
-    builtIn?: boolean;
-    localPath?: string;
-    s3Bucket?: string;
-    s3Region?: string;
-    s3AccessKey?: string;
-    s3SecretKey?: string;
-    s3Endpoint?: string;
-  };
-  engine?: {
-    headless?: boolean;
-    sessionDataPath?: string;
-    browserArgs?: string;
-  };
+class DatabaseConfigDto {
+  @IsOptional() @IsIn(['sqlite', 'postgres']) type?: 'sqlite' | 'postgres';
+  @IsOptional() @IsBoolean() builtIn?: boolean;
+  @IsOptional() @IsString() host?: string;
+  @IsOptional() @IsString() port?: string;
+  @IsOptional() @IsString() username?: string;
+  @IsOptional() @IsString() password?: string;
+  @IsOptional() @IsString() database?: string;
+  @IsOptional() @IsNumber() poolSize?: number;
+  @IsOptional() @IsBoolean() sslEnabled?: boolean;
+}
+
+class RedisConfigDto {
+  @IsOptional() @IsBoolean() enabled?: boolean;
+  @IsOptional() @IsBoolean() builtIn?: boolean;
+  @IsOptional() @IsString() host?: string;
+  @IsOptional() @IsString() port?: string;
+  @IsOptional() @IsString() password?: string;
+}
+
+class QueueConfigDto {
+  @IsOptional() @IsBoolean() enabled?: boolean;
+}
+
+class StorageConfigDto {
+  @IsOptional() @IsIn(['local', 's3']) type?: 'local' | 's3';
+  @IsOptional() @IsBoolean() builtIn?: boolean;
+  @IsOptional() @IsString() localPath?: string;
+  @IsOptional() @IsString() s3Bucket?: string;
+  @IsOptional() @IsString() s3Region?: string;
+  @IsOptional() @IsString() s3AccessKey?: string;
+  @IsOptional() @IsString() s3SecretKey?: string;
+  @IsOptional() @IsString() s3Endpoint?: string;
+}
+
+class EngineConfigDto {
+  @IsOptional() @IsBoolean() headless?: boolean;
+  @IsOptional() @IsString() sessionDataPath?: string;
+  @IsOptional() @IsString() browserArgs?: string;
+}
+
+export class SaveConfigDto {
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => DatabaseConfigDto)
+  database?: DatabaseConfigDto;
+
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => RedisConfigDto)
+  redis?: RedisConfigDto;
+
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => QueueConfigDto)
+  queue?: QueueConfigDto;
+
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => StorageConfigDto)
+  storage?: StorageConfigDto;
+
+  @IsOptional()
+  @ValidateNested()
+  @Type(() => EngineConfigDto)
+  engine?: EngineConfigDto;
 }
 
 // Database migration types for export/import
@@ -204,6 +236,7 @@ export class InfraController {
   }
 
   @Put('config')
+  @RequireRole(ApiKeyRole.ADMIN)
   @ApiOperation({ summary: 'Save infrastructure configuration to .env file' })
   @ApiResponse({ status: 200, description: 'Configuration saved' })
   @ApiBody({ description: 'Configuration to save' })
@@ -335,6 +368,7 @@ export class InfraController {
     }
   }
   @Post('restart')
+  @RequireRole(ApiKeyRole.ADMIN)
   @ApiOperation({ summary: 'Request server restart with Docker orchestration' })
   @ApiResponse({ status: 200, description: 'Server will restart with new profiles' })
   async requestRestart(@Body() body?: { profiles?: string[]; profilesToRemove?: string[] }): Promise<{
@@ -483,6 +517,7 @@ export class InfraController {
   }
 
   @Post('import-data')
+  @RequireRole(ApiKeyRole.ADMIN)
   @ApiOperation({ summary: 'Import data to Data DB (replaces existing data)' })
   @ApiBody({
     description: 'Exported data from export-data endpoint',
@@ -716,12 +751,18 @@ export class InfraController {
     @Body() body: { filePath: string },
   ): Promise<{ imported: boolean; count: number; storageType: string }> {
     const { filePath } = body;
+    const targetPath = path.resolve(process.cwd(), 'data', filePath);
+    const resolvedDataDir = path.resolve(process.cwd(), 'data');
 
-    if (!fs.existsSync(filePath)) {
+    if (!targetPath.startsWith(resolvedDataDir)) {
+      throw new Error(`Directory traversal attempt detected: ${filePath}`);
+    }
+
+    if (!fs.existsSync(targetPath)) {
       throw new Error(`File not found: ${filePath}`);
     }
 
-    const readStream = fs.createReadStream(filePath);
+    const readStream = fs.createReadStream(targetPath);
     const count = await this.storageService.importFromStream(readStream);
 
     return {
