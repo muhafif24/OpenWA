@@ -2,12 +2,12 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import LanguageDetector from 'i18next-browser-languagedetector';
 import en from './locales/en.json';
-import he from './locales/he.json';
+import id from './locales/id.json';
 
-export const supportedLanguages = ['en', 'he'] as const;
+export const supportedLanguages = ['en', 'id'] as const;
 export type SupportedLanguage = (typeof supportedLanguages)[number];
 
-export const rtlLanguages: SupportedLanguage[] = ['he'];
+export const rtlLanguages: SupportedLanguage[] = [];
 
 void i18n
   .use(LanguageDetector)
@@ -15,7 +15,7 @@ void i18n
   .init({
     resources: {
       en: { translation: en },
-      he: { translation: he },
+      id: { translation: id },
     },
     fallbackLng: 'en',
     supportedLngs: supportedLanguages as unknown as string[],

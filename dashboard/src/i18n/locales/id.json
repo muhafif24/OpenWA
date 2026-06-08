@@ -1,0 +1,512 @@
+{
+  "common": {
+    "appName": "OpenWA",
+    "appSubtitle": "WhatsApp API",
+    "loading": "Memuat...",
+    "save": "Simpan",
+    "cancel": "Batal",
+    "delete": "Hapus",
+    "edit": "Edit",
+    "create": "Buat",
+    "close": "Tutup",
+    "submit": "Kirim",
+    "confirm": "Konfirmasi",
+    "search": "Cari",
+    "filter": "Saring",
+    "actions": "Aksi",
+    "status": "Status",
+    "name": "Nama",
+    "role": "Peran",
+    "type": "Tipe",
+    "url": "URL",
+    "port": "Port",
+    "host": "Host",
+    "username": "Nama Pengguna",
+    "password": "Kata Sandi",
+    "active": "Aktif",
+    "inactive": "Tidak Aktif",
+    "enabled": "Aktif",
+    "disabled": "Nonaktif",
+    "connected": "Terhubung",
+    "disconnected": "Terputus",
+    "never": "Tidak Pernah",
+    "justNow": "Baru saja",
+    "minAgo": "{{count}} mnt yang lalu",
+    "hoursAgo": "{{count}} jam yang lalu",
+    "optional": "opsional",
+    "language": "Bahasa",
+    "english": "English",
+    "indonesian": "Bahasa Indonesia",
+    "back": "Kembali",
+    "next": "Lanjut",
+    "previous": "Sebelumnya",
+    "expand": "Perluas",
+    "collapse": "Kecilkan",
+    "logout": "Keluar",
+    "refresh": "Segarkan",
+    "errorGeneric": "Terjadi kesalahan",
+    "unknownError": "Kesalahan tidak diketahui"
+  },
+  "theme": {
+    "light": "Terang",
+    "dark": "Gelap",
+    "system": "Sistem",
+    "label": "Tema: {{value}}"
+  },
+  "nav": {
+    "dashboard": "Dasbor",
+    "sessions": "Sesi",
+    "webhooks": "Webhook",
+    "apiKeys": "Kunci API",
+    "messageTester": "Penguji Pesan",
+    "infrastructure": "Infrastruktur",
+    "plugins": "Plugin",
+    "logs": "Log"
+  },
+  "errorBoundary": {
+    "title": "Terjadi kesalahan",
+    "description": "Dasbor mengalami kesalahan tak terduga.",
+    "reload": "Muat Ulang Dasbor"
+  },
+  "login": {
+    "apiKey": "Kunci API",
+    "apiKeyPlaceholder": "Masukkan kunci API Anda",
+    "apiKeyRequired": "Kunci API diperlukan",
+    "connect": "Hubungkan",
+    "connecting": "Menghubungkan...",
+    "invalidKey": "Kunci API tidak valid",
+    "connectionError": "Tidak dapat terhubung ke server. Silakan coba lagi.",
+    "help": "Butuh bantuan?",
+    "viewDocs": "Lihat Dokumentasi",
+    "footer": "Dibuat dengan ❤️ oleh Yudhi Armyndharis dan Komunitas OpenWA",
+    "version": "v{{version}} · {{date}}"
+  },
+  "dashboard": {
+    "title": "Dasbor",
+    "subtitle": "Ringkasan sesi dan aktivitas WhatsApp Anda",
+    "stats": {
+      "activeSessions": "Sesi Aktif",
+      "messagesToday": "Pesan Hari Ini",
+      "webhooksConfigured": "Webhook Dikonfigurasi",
+      "apiCalls": "Panggilan API (24j)"
+    },
+    "sessionsOverview": "Ringkasan Sesi",
+    "showingSessions": "Menampilkan {{shown}} dari {{total}} sesi",
+    "columns": {
+      "sessionId": "ID Sesi",
+      "phone": "Nomor Telepon",
+      "status": "Status",
+      "lastActive": "Terakhir Aktif",
+      "actions": "Aksi"
+    },
+    "noSessions": "Tidak ada sesi ditemukan. Buat satu untuk memulai.",
+    "view": "Lihat",
+    "disconnect": "Putuskan",
+    "errorPrefix": "Kesalahan: {{message}}",
+    "loadError": "Gagal memuat data"
+  },
+  "sessionStatus": {
+    "created": "Baru",
+    "idle": "Siaga",
+    "initializing": "Memulai...",
+    "connecting": "Menghubungkan...",
+    "qr_ready": "Pindai QR",
+    "ready": "Terhubung",
+    "disconnected": "Terputus"
+  },
+  "sessions": {
+    "title": "Sesi",
+    "subtitle": "Kelola sesi WhatsApp dan koneksi kode QR Anda",
+    "newSession": "Sesi Baru",
+    "searchPlaceholder": "Cari sesi...",
+    "filter": {
+      "all": "Semua Status",
+      "active": "Aktif (Terhubung)",
+      "inactive": "Tidak Aktif",
+      "connecting": "Menghubungkan"
+    },
+    "empty": {
+      "title": "Tidak ada sesi ditemukan",
+      "description": "Buat sesi baru untuk memulai"
+    },
+    "create": {
+      "title": "Buat Sesi Baru",
+      "label": "Nama Sesi",
+      "placeholder": "mis., bot-marketing",
+      "hint": "Gunakan huruf kecil, angka, dan tanda hubung saja. Contoh: <code>dukungan-pelanggan</code>, <code>bot-1</code>",
+      "invalidChars": "Karakter tidak valid. Hanya diizinkan huruf kecil, angka, dan tanda hubung.",
+      "tooLong": "Nama maksimal 50 karakter ({{length}}/50).",
+      "duplicate": "Sesi dengan nama ini sudah ada.",
+      "successTitle": "Sesi Dibuat",
+      "successDesc": "Sesi \"{{name}}\" berhasil dibuat",
+      "errorTitle": "Gagal Membuat",
+      "errorDefault": "Gagal membuat sesi"
+    },
+    "delete": {
+      "title": "Konfirmasi Hapus",
+      "message": "Apakah Anda yakin ingin menghapus sesi <strong>\"{{name}}\"</strong>?",
+      "warning": "Tindakan ini tidak dapat dibatalkan.",
+      "successTitle": "Sesi Dihapus",
+      "successDescNamed": "Sesi \"{{name}}\" telah dihapus",
+      "successDescGeneric": "Sesi telah dihapus",
+      "errorTitle": "Gagal Menghapus",
+      "errorDefault": "Gagal menghapus sesi"
+    },
+    "qr": {
+      "title": "Pindai Kode QR",
+      "step1": "<strong>1.</strong> Buka WhatsApp di ponsel Anda",
+      "step2": "<strong>2.</strong> Ketuk <strong>Menu</strong> → <strong>Perangkat Tertaut</strong>",
+      "step3": "<strong>3.</strong> Ketuk <strong>Tautkan Perangkat</strong> dan pindai QR ini",
+      "autoRefresh": "QR diperbarui otomatis setiap 5 detik",
+      "generating": "Menghasilkan kode QR...",
+      "unavailable": "Kode QR belum tersedia. Coba lagi sebentar lagi.",
+      "preparing": "Menyiapkan kode QR...",
+      "showQr": "Tampilkan QR",
+      "loading": "Memuat...",
+      "scanToConnect": "Pindai kode QR untuk terhubung"
+    },
+    "details": {
+      "title": "Detail Sesi",
+      "name": "Nama",
+      "status": "Status",
+      "sessionId": "ID Sesi",
+      "phone": "Nomor Telepon",
+      "phoneNone": "Tidak terhubung",
+      "created": "Dibuat",
+      "lastActive": "Terakhir Aktif"
+    },
+    "actions": {
+      "view": "Lihat",
+      "start": "Mulai",
+      "stop": "Berhenti",
+      "reconnect": "Hubungkan Ulang",
+      "delete": "Hapus"
+    },
+    "toasts": {
+      "readyTitle": "Sesi Siap",
+      "readyDesc": "Sesi WhatsApp sekarang terhubung",
+      "disconnectedTitle": "Sesi Terputus",
+      "disconnectedDesc": "Sesi WhatsApp terputus"
+    },
+    "card": {
+      "phone": "Telepon",
+      "sessionId": "ID Sesi",
+      "lastActive": "Terakhir Aktif"
+    }
+  },
+  "webhooks": {
+    "title": "Webhook",
+    "subtitle": "Konfigurasi panggilan balik HTTP untuk notifikasi acara waktu nyata",
+    "addWebhook": "Tambah Webhook",
+    "createTitle": "Buat Webhook",
+    "editTitle": "Edit Webhook",
+    "deleteTitle": "Hapus Webhook",
+    "deleteConfirm": "Apakah Anda yakin ingin menghapus webhook ini?",
+    "selectSession": "Pilih sesi...",
+    "session": "Sesi",
+    "events": "Acara",
+    "available": "Acara Tersedia",
+    "saveChanges": "Simpan Perubahan",
+    "columns": {
+      "url": "URL",
+      "events": "Acara",
+      "session": "Sesi",
+      "status": "Status",
+      "actions": "Aksi"
+    },
+    "empty": {
+      "title": "Tidak ada webhook yang dikonfigurasi",
+      "description": "Tambahkan webhook untuk menerima notifikasi acara waktu nyata"
+    },
+    "toasts": {
+      "created": "Webhook berhasil dibuat",
+      "createFailed": "Gagal membuat webhook: {{message}}",
+      "deleted": "Webhook berhasil dihapus",
+      "deleteFailed": "Gagal menghapus webhook: {{message}}",
+      "updated": "Webhook berhasil diperbarui",
+      "updateFailed": "Gagal memperbarui webhook: {{message}}",
+      "testOk": "Pengujian webhook berhasil! Status: {{status}}",
+      "testFailed": "Pengujian webhook gagal: {{message}}",
+      "testError": "Gagal menguji webhook: {{message}}"
+    },
+    "actions": {
+      "test": "Uji",
+      "edit": "Edit",
+      "delete": "Hapus"
+    },
+    "eventDescriptions": {
+      "message.received": "Saat pesan diterima",
+      "message.sent": "Saat pesan terkirim",
+      "session.connected": "Saat sesi terhubung",
+      "session.disconnected": "Saat sesi terputus",
+      "session.qr": "Saat kode QR dihasilkan",
+      "all": "Semua acara"
+    }
+  },
+  "apiKeys": {
+    "title": "Kunci API",
+    "subtitle": "Kelola kunci API untuk otentikasi dan kontrol akses",
+    "createBtn": "Buat Kunci API",
+    "modalTitle": "Buat Kunci API",
+    "createdTitle": "Kunci API Dibuat",
+    "createdHint": "Salin kunci ini sekarang. Anda tidak akan bisa melihatnya lagi.",
+    "namePlaceholder": "mis., Kunci Produksi",
+    "rolesTitle": "Referensi Peran",
+    "roles": {
+      "admin": "Admin",
+      "operator": "Operator",
+      "viewer": "Viewer"
+    },
+    "roleDescriptions": {
+      "admin": "Akses penuh ke semua sumber daya",
+      "operator": "Manajemen sesi & pesan",
+      "viewer": "Hanya akses baca"
+    },
+    "columns": {
+      "name": "Nama",
+      "key": "Kunci",
+      "role": "Peran",
+      "status": "Status",
+      "lastUsed": "Terakhir Digunakan",
+      "actions": "Aksi"
+    },
+    "statuses": {
+      "active": "Aktif",
+      "revoked": "Dicabut"
+    },
+    "empty": {
+      "title": "Belum ada kunci API",
+      "description": "Buat kunci API untuk mengautentikasi permintaan Anda"
+    },
+    "confirm": {
+      "deleteTitle": "Hapus Kunci API",
+      "revokeTitle": "Cabut Kunci API",
+      "deleteMessage": "Apakah Anda yakin ingin menghapus <strong>{{name}}</strong> secara permanen? Tindakan ini tidak dapat dibatalkan.",
+      "revokeMessage": "Apakah Anda yakin ingin mencabut <strong>{{name}}</strong>? Kunci ini tidak akan berfungsi lagi.",
+      "delete": "Hapus",
+      "revoke": "Cabut"
+    },
+    "actions": {
+      "copy": "Salin",
+      "revoke": "Cabut",
+      "delete": "Hapus"
+    }
+  },
+  "logs": {
+    "title": "Log Audit",
+    "subtitle": "Lacak dan tinjau semua aksi API dan acara sistem",
+    "exportCsv": "Ekspor CSV",
+    "searchPlaceholder": "Cari log...",
+    "severity": {
+      "all": "Semua Keparahan",
+      "info": "Info",
+      "warn": "Peringatan",
+      "error": "Kesalahan"
+    },
+    "columns": {
+      "timestamp": "Waktu",
+      "action": "Aksi",
+      "session": "Sesi",
+      "apiKey": "Kunci API",
+      "ip": "Alamat IP",
+      "severity": "Keparahan"
+    },
+    "empty": {
+      "title": "Tidak ada log ditemukan",
+      "description": "Log audit akan muncul di sini seiring dilakukannya aksi"
+    }
+  },
+  "messageTester": {
+    "title": "Penguji Pesan",
+    "subtitle": "Kirim pesan uji coba melalui API",
+    "compose": "Kirim Pesan Uji",
+    "responseTitle": "Respons API",
+    "session": "Sesi",
+    "noReadySessions": "Tidak ada sesi yang siap",
+    "sessionOptionPhoneNone": "Tanpa telepon",
+    "recipientType": "Tipe Penerima",
+    "personal": "Personal",
+    "group": "Grup",
+    "selectGroup": "Pilih Grup",
+    "recipientPhone": "Nomor Telepon Penerima",
+    "loadingGroups": "Memuat grup...",
+    "noGroupsFound": "Tidak ada grup ditemukan",
+    "selectGroupHint": "Pilih grup dari WhatsApp Anda",
+    "phoneHint": "Gunakan format internasional tanpa spasi",
+    "messageType": "Tipe Pesan",
+    "types": {
+      "text": "Teks",
+      "image": "Gambar",
+      "video": "Video",
+      "audio": "Audio",
+      "document": "Dokumen"
+    },
+    "messageContent": "Isi Pesan",
+    "messagePlaceholder": "Masukkan pesan Anda di sini...",
+    "mediaUrl": "URL Media",
+    "caption": "Keterangan",
+    "filename": "Nama File",
+    "captionPlaceholder": "Masukkan keterangan...",
+    "filenamePlaceholder": "dokumen.pdf",
+    "send": "Kirim Pesan",
+    "sending": "Mengirim...",
+    "viewOnly": "Hanya Lihat",
+    "responseEmpty": "Kirim pesan untuk melihat respons API",
+    "successLabel": "200 OK - Sukses",
+    "failedLabel": "400 - Gagal",
+    "response": {
+      "timestamp": "Waktu",
+      "messageId": "ID Pesan",
+      "error": "Kesalahan"
+    },
+    "sendFailed": "Gagal mengirim pesan"
+  },
+  "infrastructure": {
+    "title": "Infrastruktur",
+    "subtitle": "Konfigurasi server, database, cache, storage, dan pengaturan engine",
+    "saveConfig": "Simpan Konfigurasi",
+    "saving": "Menyimpan...",
+    "server": {
+      "title": "Konfigurasi Server",
+      "production": "Produksi",
+      "development": "Pengembangan",
+      "environment": "Lingkungan",
+      "domain": "Domain",
+      "apiPort": "Port API",
+      "dashboardPort": "Port Dasbor",
+      "corsOrigins": "Asal CORS",
+      "corsPlaceholder": "* atau asal yang dipisahkan koma",
+      "publicApiUrl": "URL API Publik (opsional)",
+      "publicDashboardUrl": "URL Dasbor Publik (opsional)"
+    },
+    "webhook": {
+      "title": "Webhook & Pembatasan Akses",
+      "settings": "Pengaturan Webhook",
+      "timeout": "Batas Waktu (ms)",
+      "maxRetries": "Maks Coba Lagi",
+      "retryDelay": "Jeda Coba Lagi (ms)",
+      "rateLimit": "Pembatasan Akses",
+      "window": "Jendela Waktu (detik)",
+      "maxReq": "Maks Permintaan per Jendela"
+    },
+    "database": {
+      "title": "Konfigurasi Database",
+      "sqlite": "SQLite",
+      "sqliteDesc": "Database berbasis file lokal",
+      "postgres": "PostgreSQL",
+      "postgresDesc": "Database siap produksi",
+      "useBuiltIn": "Gunakan Kontainer PostgreSQL Bawaan",
+      "builtInDesc": "OpenWA akan mengelola kontainer PostgreSQL untuk Anda",
+      "dbName": "Nama Database",
+      "poolSize": "Ukuran Pool",
+      "ssl": "Koneksi SSL",
+      "sslDesc": "Aktifkan TLS/SSL untuk koneksi database yang aman",
+      "migrationsTitle": "Migrasi Database",
+      "migrationsStatus": "Skema disinkronisasi secara otomatis dengan TypeORM",
+      "migrationsHint": "Migrasi dikelola secara otomatis. Gunakan CLI untuk migrasi manual."
+    },
+    "redis": {
+      "title": "Redis",
+      "enable": "Aktifkan Redis",
+      "enableDesc": "Diperlukan untuk caching, penyimpanan sesi, dan antrian BullMQ",
+      "useBuiltIn": "Gunakan Kontainer Redis Bawaan",
+      "builtInDesc": "OpenWA akan mengelola kontainer Redis untuk Anda",
+      "queueTitle": "Aktifkan Sistem Antrian BullMQ",
+      "queueDesc": "Gunakan antrian pesan untuk pengiriman pesan dan webhook yang andal",
+      "statsTitle": "Statistik Antrian",
+      "messageQueue": "Antrian Pesan",
+      "webhookQueue": "Antrian Webhook",
+      "pending": "Tertunda",
+      "completed": "Selesai",
+      "failed": "Gagal",
+      "clearFailed": "Hapus Pekerjaan Gagal",
+      "viewBullMq": "Lihat Dasbor Bull MQ",
+      "disabledTitle": "Redis Dinonaktifkan",
+      "disabledDesc": "Aktifkan Redis untuk caching, penyimpanan sesi, dan antrian pesan BullMQ.",
+      "passwordOptional": "(opsional)"
+    },
+    "storage": {
+      "title": "Konfigurasi Penyimpanan",
+      "local": "Filesystem Lokal",
+      "localDesc": "Simpan file media secara lokal",
+      "s3": "Amazon S3",
+      "s3Desc": "Penyimpanan cloud (kompatibel dengan S3)",
+      "useBuiltIn": "Gunakan Kontainer MinIO Bawaan",
+      "builtInDesc": "OpenWA akan mengelola kontainer MinIO (kompatibel S3) untuk Anda",
+      "storagePath": "Jalur Penyimpanan",
+      "bucket": "Nama Bucket",
+      "region": "Wilayah",
+      "accessKey": "Kunci Akses (Access Key)",
+      "secretKey": "Kunci Rahasia (Secret Key)",
+      "endpoint": "Titik Akhir Kustom (opsional)",
+      "endpointHint": "Untuk MinIO atau layanan yang kompatibel dengan S3 lainnya"
+    },
+    "statusLabels": {
+      "connected": "Terhubung",
+      "disconnected": "Terputus",
+      "disabled": "Dinonaktifkan"
+    },
+    "restart": {
+      "idleTitle": "⚙️ Konfigurasi Tersimpan",
+      "restartingTitle": "🔄 Merestart Server...",
+      "waitingTitle": "⏳ Mohon Tunggu...",
+      "successTitle": "✅ Server Siap",
+      "errorTitle": "❌ Gagal Merestart",
+      "idleDesc": "Konfigurasi telah disimpan ke <code>.env.generated</code>.<br/>Server perlu direstart untuk menerapkan perubahan.",
+      "later": "Restart Nanti",
+      "now": "Restart Sekarang",
+      "restartingMsg": "Merestart server... {{count}}d",
+      "checking": "Memeriksa status server...",
+      "dontClose": "Harap jangan tutup jendela ini",
+      "successMsg": "Server kembali daring! Halaman akan dimuat ulang secara otomatis.",
+      "errorMsg": "Server tidak merespons setelah 30 detik. Silakan periksa log Docker dan restart secara manual.",
+      "reload": "Muat Ulang Halaman"
+    },
+    "toasts": {
+      "saveFailed": "Gagal Menyimpan"
+    }
+  },
+  "plugins": {
+    "title": "Plugin",
+    "subtitle": "Kelola mesin, backend penyimpanan, dan ekstensi",
+    "refresh": "Segarkan",
+    "engineCard": "Mesin WhatsApp Aktif",
+    "running": "Berjalan",
+    "supportedFeatures": "Fitur Didukung:",
+    "more": "+{{count}} lagi",
+    "builtIn": "Bawaan",
+    "noDescription": "Tidak ada deskripsi tersedia",
+    "required": "Diperlukan",
+    "active": "Aktif",
+    "activate": "Aktifkan",
+    "enable": "Aktifkan",
+    "disable": "Nonaktifkan",
+    "healthCheck": "Pemeriksaan Kesehatan",
+    "configure": "Konfigurasi",
+    "empty": {
+      "title": "Tidak Ada Plugin Ditemukan",
+      "description": "Instal plugin untuk memperluas fungsionalitas OpenWA"
+    },
+    "config": {
+      "title": "Konfigurasi {{name}}",
+      "restartNotice": "Perubahan memerlukan restart server untuk diterapkan",
+      "engineType": "Tipe Mesin",
+      "headless": "Mode Headless",
+      "headlessDesc": "Jalankan browser tanpa UI (direkomendasikan untuk produksi)",
+      "sessionDataPath": "Jalur Data Sesi",
+      "browserArgs": "Argumen Browser",
+      "noOptions": "Tidak ada opsi konfigurasi untuk plugin ini",
+      "save": "Simpan Konfigurasi"
+    },
+    "toasts": {
+      "errorTitle": "Kesalahan Plugin",
+      "errorDefault": "Gagal mengubah status plugin",
+      "healthOk": "Pemeriksaan Kesehatan Berhasil",
+      "healthFail": "Pemeriksaan Kesehatan Gagal",
+      "healthError": "Kesalahan Pemeriksaan Kesehatan",
+      "savedTitle": "Konfigurasi Tersimpan",
+      "savedDesc": "Server perlu direstart untuk menerapkan perubahan.",
+      "saveFailed": "Gagal Menyimpan"
+    }
+  }
+}
